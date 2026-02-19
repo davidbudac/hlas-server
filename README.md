@@ -1,0 +1,41 @@
+# hlas-server
+
+Remote speech-to-text transcription server for [Hlas](https://github.com/davidbudac/hlas), powered by NVIDIA's Parakeet TDT 0.6B v2 model.
+
+## Quickstart
+
+```bash
+docker build -t hlas-server .
+docker run -d --name hlas --gpus all -p 8000:8000 \
+  -v hlas-models:/home/appuser/.cache \
+  --restart unless-stopped hlas-server
+```
+
+Requires an NVIDIA GPU and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+## API
+
+### `GET /health`
+
+```bash
+curl http://localhost:8000/health
+# {"status": "ok", "model_loaded": true}
+```
+
+### `POST /transcribe`
+
+```bash
+curl -X POST http://localhost:8000/transcribe -F "file=@audio.wav"
+# {"text": "hello world", "duration_seconds": 0.342}
+```
+
+Audio must be 16kHz WAV. Multi-channel files are automatically mixed to mono.
+
+## Running without Docker
+
+```bash
+pip install -r requirements.txt
+uvicorn server:app --host 0.0.0.0 --port 8000
+```
+
+The model (~1.2 GB) downloads automatically on first startup.

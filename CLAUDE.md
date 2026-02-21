@@ -36,4 +36,4 @@ Requires NVIDIA Container Toolkit for `--gpus all`.
 
 ## Deployment
 
-Runs on `db@100.108.246.57` (RTX 4070, 12GB VRAM). Model cache persists in the `hlas-models` Docker volume.
+Runs on a local GPU server (RTX 4070, 12GB VRAM). Model cache persists in the `hlas-models` Docker volume.

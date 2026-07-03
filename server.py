@@ -51,22 +51,22 @@ import torch
 # Restore stderr
 sys.stderr = _stderr
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
-
-app = FastAPI(title="Hlas Parakeet Server")
 
 model = None
 
 
-@app.on_event("startup")
-def load_model():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     global model
-    print("Loading nvidia/parakeet-tdt-0.6b-v2 ...")
+    print("Loading nvidia/parakeet-tdt-0.6b-v3 ...")
     # Silence stderr during model load (NeMo prints training config warnings)
     _stderr = sys.stderr
     sys.stderr = open(os.devnull, "w")
-    model = nemo_asr.models.ASRModel.from_pretrained("nvidia/parakeet-tdt-0.6b-v2")
+    model = nemo_asr.models.ASRModel.from_pretrained("nvidia/parakeet-tdt-0.6b-v3")
     model.eval()
     if torch.cuda.is_available():
         model = model.cuda()
@@ -74,6 +74,10 @@ def load_model():
         model.decoding.decoding.disable_cuda_graphs()
     sys.stderr = _stderr
     print("Model loaded and ready.")
+    yield
+
+
+app = FastAPI(title="Hlas Parakeet Server", lifespan=lifespan)
 
 
 @app.get("/health")

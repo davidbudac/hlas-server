@@ -1,6 +1,6 @@
 # hlas-server
 
-Remote speech-to-text transcription server for [Hlas](https://github.com/davidbudac/hlas), powered by NVIDIA's Parakeet TDT 0.6B v2 model.
+Remote speech-to-text transcription server for [Hlas](https://github.com/davidbudac/hlas), powered by NVIDIA's Parakeet TDT 0.6B v3 model.
 
 ## Quickstart
 

@@ -2,14 +2,14 @@
 
 ## Overview
 
-Hlas Server is a speech-to-text transcription API using NVIDIA's Parakeet TDT 0.6B v2 model. It serves as the remote transcription backend for the [Hlas](https://github.com/davidbudac/hlas) macOS app.
+Hlas Server is a speech-to-text transcription API using NVIDIA's Parakeet TDT 0.6B v3 model. It serves as the remote transcription backend for the [Hlas](https://github.com/davidbudac/hlas) macOS app.
 
 ## Tech Stack
 
 - **Language:** Python 3.10+
 - **Framework:** FastAPI with Uvicorn
-- **Model:** NVIDIA Parakeet TDT 0.6B v2 (via NeMo ASR)
-- **Runtime:** Docker with NVIDIA CUDA 12.4.1
+- **Model:** NVIDIA Parakeet TDT 0.6B v3 (via NeMo ASR)
+- **Runtime:** Docker with NVIDIA CUDA 12.8.1
 
 ## API
 

@@ -19,7 +19,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 FROM nvidia/cuda:12.8.1-runtime-ubuntu22.04
 
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \

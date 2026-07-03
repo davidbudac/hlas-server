@@ -69,7 +69,8 @@ async def lifespan(app: FastAPI):
     model = nemo_asr.models.ASRModel.from_pretrained("nvidia/parakeet-tdt-0.6b-v3")
     model.eval()
     if torch.cuda.is_available():
-        model = model.cuda()
+        model = model.to(dtype=torch.bfloat16).cuda()
+        torch.cuda.empty_cache()
     if hasattr(model, "decoding") and hasattr(model.decoding, "decoding"):
         model.decoding.decoding.disable_cuda_graphs()
     sys.stderr = _stderr

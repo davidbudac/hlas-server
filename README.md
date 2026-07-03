@@ -39,3 +39,19 @@ uvicorn server:app --host 0.0.0.0 --port 8000
 ```
 
 The model (~1.2 GB) downloads automatically on first startup.
+
+## Running on Apple Silicon (M-series Macs)
+
+The Docker/CUDA setup is NVIDIA-only. On M-series Macs, use the native MLX
+server, which exposes the same `/health` and `/transcribe` API (so the Hlas app
+needs no changes) but runs on the Metal GPU via
+[`parakeet-mlx`](https://github.com/senstella/parakeet-mlx):
+
+```bash
+pip install -r requirements-mac.txt
+uvicorn server_mac:app --host 0.0.0.0 --port 8000
+```
+
+Run it natively, not in Docker (Docker on macOS can't reach the Metal GPU). The
+model (~600 MB) downloads on first startup and is cached afterward.
+Transcription runs faster than real-time on an M4.

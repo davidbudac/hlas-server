@@ -1,0 +1,7 @@
+# Apple Silicon (M-series) dependencies for server_mac.py.
+# Uses MLX instead of NeMo/CUDA — no torch, no nemo_toolkit.
+fastapi==0.121.0
+uvicorn[standard]==0.38.0
+python-multipart==0.0.20
+soundfile==0.13.1
+parakeet-mlx==0.5.2

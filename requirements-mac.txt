@@ -4,4 +4,6 @@ fastapi==0.121.0
 uvicorn[standard]==0.38.0
 python-multipart==0.0.20
 soundfile==0.13.1
+# Numba (via librosa) does not yet support NumPy 2.5.
+numpy>=2.2.5,<2.5
 parakeet-mlx==0.5.2

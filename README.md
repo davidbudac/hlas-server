@@ -48,8 +48,10 @@ needs no changes) but runs on the Metal GPU via
 [`parakeet-mlx`](https://github.com/senstella/parakeet-mlx):
 
 ```bash
-pip install -r requirements-mac.txt
-uvicorn server_mac:app --host 0.0.0.0 --port 8000
+uv venv --python 3.13
+uv pip install --python .venv/bin/python -r requirements-mac.txt
+uv run --no-project --python .venv/bin/python \
+  uvicorn server_mac:app --host 0.0.0.0 --port 8000
 ```
 
 Run it natively, not in Docker (Docker on macOS can't reach the Metal GPU). The
